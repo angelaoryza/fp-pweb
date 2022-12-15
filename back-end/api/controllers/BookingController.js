@@ -39,8 +39,8 @@
             where: {userId : params.userId},
           });
           // no data
-          if(!certainBooking.length) return res.serverError({err: 'No data found'})
-          return res.ok(certainBooking)
+          if(!certainBooking.length) return res.ok({orders: []})
+          return res.ok({orders: certainBooking})
     }
     catch (error) {
         return res.badRequest({err: error})
