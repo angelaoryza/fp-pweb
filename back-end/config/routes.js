@@ -13,4 +13,6 @@ module.exports.routes = {
     'POST /login': 'UserController.login',
     'POST /createKamar': 'KamarController.createKamar',
     'GET /getAllKamar': 'KamarController.getAllKamar',
+    'POST /createBooking': 'BookingController.createBooking',
+    'GET /getAllBooking' : 'BookingController.getAllBooking',
 };
