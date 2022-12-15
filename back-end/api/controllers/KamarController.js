@@ -8,6 +8,7 @@
 module.exports = {
   // create
   createKamar: async function(req, res){
+    res.set('Access-Control-Allow-Origin', "http://localhost:8080")
     const params = req.allParams()
     if(!params) return res.badRequest({err: 'No data is sent'})
 
@@ -24,6 +25,7 @@ module.exports = {
   
   // get all kamar
   getAllKamar: async function(req, res){
+    res.set('Access-Control-Allow-Origin', "http://localhost:8080")
     const allKamar = await Kamar.find()
     if(!allKamar) return res.badRequest({err: 'No room found'})
     return res.ok(allKamar)
