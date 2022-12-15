@@ -23,6 +23,7 @@
           metodePembayaran : params.metodePembayaran,
           idKamar : params.idKamar,
           userId : params.userId,
+          status : params.status,
       }, (err, result) => {
           if(err) return res.serverError(err)
           return res.ok(result)
@@ -31,9 +32,19 @@
     
     // get all kamar
     getAllBooking: async function(req, res){
-      const allBooking = await Booking.find()
-      if(!allBooking) return res.badRequest({err: 'No booking found'})
-      return res.ok(allBooking)
+    const params = req.allParams()
+    if(!params) return res.badRequest({err: 'No data is sent'})
+    try {
+        var certainBooking = await Booking.find({
+            where: {userId : params.userId},
+          });
+          // no data
+          if(!certainBooking.length) return res.serverError({err: 'No data found'})
+          return res.ok(certainBooking)
+    }
+    catch (error) {
+        return res.badRequest({err: error})
+    }
     }
   
   };
