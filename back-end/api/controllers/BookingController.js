@@ -30,7 +30,7 @@
       })
     },
     
-    // get all kamar
+    // get all booking from certain user
     getAllBooking: async function(req, res){
     const params = req.allParams()
     if(!params) return res.badRequest({err: 'No data is sent'})
@@ -45,8 +45,44 @@
     catch (error) {
         return res.badRequest({err: error})
     }
-    }
-  
+    },
+
+    //set booking status
+    updateBookingStatus: async function(req, res){
+      const params = req.allParams()
+      if(!params) return res.badRequest({err: 'No data is sent'})
+      try {
+        var order = await Booking.updateOne(
+          { id : params.id })
+          .set({
+            status : params.status
+          })
+          // no data
+          // if(!order.length) return res.serverError({err: 'No data found'})
+          return res.ok(order)          
+                
+      }
+      catch(error) {
+        return res.badRequest({err: error})
+      }
+    },
+
+    deleteBooking: async function(req, res) {
+      const params = req.allParams()
+      if(!params) return res.badRequest({err: 'No data is sent'})
+      try {
+        var deleteOrder = await Booking.destroyOne(
+          { id : params.id })
+          // no data
+          // if(!order.length) return res.serverError({err: 'No data found'})
+          return res.ok(deleteOrder)          
+                
+      }
+      catch(error) {
+        return res.badRequest({err: error})
+      }
+    },
+
   };
   
   
