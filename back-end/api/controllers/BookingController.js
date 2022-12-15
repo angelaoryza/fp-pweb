@@ -31,12 +31,12 @@
     },
     
     // get all booking from certain user
-    getAllBooking: async function(req, res){
+    getCertainBooking: async function(req, res){
     const params = req.allParams()
     if(!params) return res.badRequest({err: 'No data is sent'})
     try {
         var certainBooking = await Booking.find({
-            where: {userId : params.userId},
+            where: {id : params.id},
           });
           // no data
           if(!certainBooking.length) return res.serverError({err: 'No data found'})
@@ -46,6 +46,24 @@
         return res.badRequest({err: error})
     }
     },
+
+
+    getAllBooking: async function(req, res){
+      const params = req.allParams()
+      if(!params) return res.badRequest({err: 'No data is sent'})
+      try {
+          var certainBooking = await Booking.find({
+              where: {userId : params.userId},
+            });
+            // no data
+            if(!certainBooking.length) return res.serverError({err: 'No data found'})
+            return res.ok(certainBooking)
+      }
+      catch (error) {
+          return res.badRequest({err: error})
+      }
+      },
+
 
     //set booking status
     updateBookingStatus: async function(req, res){

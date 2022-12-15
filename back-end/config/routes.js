@@ -15,6 +15,7 @@ module.exports.routes = {
     'GET /getAllKamar': 'KamarController.getAllKamar',
     'POST /createBooking': 'BookingController.createBooking',
     'GET /getAllBooking' : 'BookingController.getAllBooking',
+    'GET /getCertainBooking' : 'BookingController.getCertainBooking',
     'PATCH /updateBookingStatus' : 'BookingController.updateBookingStatus',
     'DELETE /deleteBooking' : 'BookingController.deleteBooking'
 };
